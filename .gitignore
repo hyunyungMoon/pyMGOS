@@ -1,0 +1,11 @@
+.DS_Store
+/build
+/CMake/lib
+/CMake/bin
+/lib
+/.vscode
+/data
+/dev_vdrc
+/Doc
+/pybind11
+
