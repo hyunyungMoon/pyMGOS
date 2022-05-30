@@ -22,8 +22,13 @@ void init_MolecularChannelSet(py::module& m) {
         .def("size", &MolecularChannelSet::size, "Counts the total number of channels in the container.")
         .def("empty", &MolecularChannelSet::empty, "Tests if the container is empty.")
         .def("push_back", &MolecularChannelSet::push_back, "Adds the channel to the end of the container.")
-        .def("begin", &MolecularChannelSet::begin, "Returns the channel iterator addressing the first element in the container.")
-        .def("end", &MolecularChannelSet::end, "Returns the channel iterator addressing one succeeding the last element in the container.");
+        // .def("begin", &MolecularChannelSet::begin, "Returns the channel iterator addressing the first element in the container.")
+        // .def("end", &MolecularChannelSet::end, "Returns the channel iterator addressing one succeeding the last element in the container.")
+        .def(
+            "__iter__", [](MolecularChannelSet& a) {
+                return py::make_iterator(a.begin(), a.end());
+            },
+            py::keep_alive<0, 1>());
 }
 
 #endif
