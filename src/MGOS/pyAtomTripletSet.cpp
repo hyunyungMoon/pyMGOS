@@ -16,7 +16,12 @@ void init_AtomTripletSet(py::module &m) {
         .def("size", &AtomTripletSet::size, "Counts the total number of atom-triplets in the AtomTripletSet object.")
         .def("empty", &AtomTripletSet::empty, "Tests if the container of the AtomTripletSet object is empty.")
         .def("push_back", &AtomTripletSet::push_back, "Adds the atom-triplet to the end of the container of the AtomTripletSet object.")
-        .def("begin", &AtomTripletSet::begin, "Returns the atom-triplet iterator addressing the first element in the container of the AtomTripletSet object.")
-        .def("end", &AtomTripletSet::end, "Returns the atom-triplet iterator addressing one succeeding the last element in the container of the AtomTripletSet object.");
+        //.def("begin", &AtomTripletSet::begin, "Returns the atom-triplet iterator addressing the first element in the container of the AtomTripletSet object.")
+        //.def("end", &AtomTripletSet::end, "Returns the atom-triplet iterator addressing one succeeding the last element in the container of the AtomTripletSet object.");
+        .def(
+            "__iter__", [](AtomTripletSet &a) {
+                return py::make_iterator(a.begin(), a.end());
+            },
+            py::keep_alive<0, 1>());
 }
 #endif

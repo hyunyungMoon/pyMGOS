@@ -20,8 +20,13 @@ void init_MolecularPocketSet(py::module& m) {
         .def("size", &MolecularPocketSet::size, "Counts the total number of pockets in the container in the the MolecularPocketSet object.")
         .def("empty", &MolecularPocketSet::empty, "Tests if the container in the the MolecularPocketSet object is empty.")
         .def("push_back", &MolecularPocketSet::push_back, "Adds the pocket to the end of the container in the the MolecularPocketSet object.")
-        .def("begin", &MolecularPocketSet::begin, "Returns the pocket iterator addressing the first element in the container in the the MolecularPocketSet object.")
-        .def("end", &MolecularPocketSet::end, "Returns the pocket iterator addressing one succeeding the last element in the container in the the MolecularPocketSet object.");
+        //.def("begin", &MolecularPocketSet::begin, "Returns the pocket iterator addressing the first element in the container in the the MolecularPocketSet object.")
+        //.def("end", &MolecularPocketSet::end, "Returns the pocket iterator addressing one succeeding the last element in the container in the the MolecularPocketSet object.")
+        .def(
+            "__iter__", [](MolecularPocketSet& a) {
+                return py::make_iterator(a.begin(), a.end());
+            },
+            py::keep_alive<0, 1>());
 }
 
 #endif

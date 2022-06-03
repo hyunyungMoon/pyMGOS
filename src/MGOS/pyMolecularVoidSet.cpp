@@ -34,8 +34,13 @@ void init_MolecularVoidSet(py::module& m) {
         .def("size", &MolecularVoidSet::size, "Counts the total number of voids in the container.")
         .def("empty", &MolecularVoidSet::empty, "Tests if the container is empty.")
         .def("push_back", &MolecularVoidSet::push_back, "Adds a void to the end of the container.")
-        .def("begin", &MolecularVoidSet::begin, "Returns the void iterator addressing the first element in the container.")
-        .def("end", &MolecularVoidSet::end, "Return the void iterator addressing one succeeding the last element in the container.");
+        //.def("begin", &MolecularVoidSet::begin, "Returns the void iterator addressing the first element in the container.")
+        //.def("end", &MolecularVoidSet::end, "Return the void iterator addressing one succeeding the last element in the container.")
+        .def(
+            "__iter__", [](MolecularVoidSet& a) {
+                return py::make_iterator(a.begin(), a.end());
+            },
+            py::keep_alive<0, 1>());
 }
 
 #endif
